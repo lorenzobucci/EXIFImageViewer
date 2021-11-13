@@ -4,12 +4,14 @@ from PyQt5.QtGui import QPixmap, QIcon
 from PyQt5.QtWidgets import QStyle
 
 
-class MainView(object):
-    def __init__(self, mainWindow):
-        mainWindow.setObjectName("MainWindow")
-        mainWindow.resize(1022, 616)
+class ImageViewer(QtWidgets.QMainWindow):
+    def __init__(self):
+        super().__init__()
 
-        self.centralwidget = QtWidgets.QWidget(mainWindow)
+        self.setObjectName("ImageViewer")
+        self.resize(1022, 616)
+
+        self.centralwidget = QtWidgets.QWidget(self)
         self.centralwidget.setObjectName("centralwidget")
 
         self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
@@ -22,9 +24,6 @@ class MainView(object):
         sizePolicy.setHeightForWidth(self.immagine.sizePolicy().hasHeightForWidth())
         self.immagine.setSizePolicy(sizePolicy)
         self.immagine.setAlignment(QtCore.Qt.AlignCenter)
-        pixmap = QPixmap("images/sample.jpg")
-        self.immagine.setPixmap(pixmap)
-        pixmap.scaled(self.immagine.width(), self.immagine.height(), QtCore.Qt.KeepAspectRatio)
         self.immagine.setObjectName("immagine")
         self.gridLayout.addWidget(self.immagine, 0, 0, 1, 7)
 
@@ -60,7 +59,8 @@ class MainView(object):
         self.bottoneImmagineSuccessiva.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.bottoneImmagineSuccessiva.setObjectName("BottoneImmagineSuccessiva")
         self.bottoneImmagineSuccessiva.setToolTip("Immagine successiva")
-        self.bottoneImmagineSuccessiva.setIcon(self.bottoneImmagineSuccessiva.style().standardIcon(QStyle.SP_ArrowRight))
+        self.bottoneImmagineSuccessiva.setIcon(
+            self.bottoneImmagineSuccessiva.style().standardIcon(QStyle.SP_ArrowRight))
         self.bottoneImmagineSuccessiva.setIconSize(QSize(24, 24))
         self.gridLayout.addWidget(self.bottoneImmagineSuccessiva, 1, 3, 1, 1)
 
@@ -71,7 +71,7 @@ class MainView(object):
         self.bottoneRuotaAntiorario.setObjectName("BottoneRuotaAntiorario")
         self.bottoneRuotaAntiorario.setToolTip("Ruota immagine in senso antiorario")
         iconaAntiorario = QIcon()
-        iconaAntiorario.addFile(u"icons/rotate_left_black_24dp.svg", QSize(), QIcon.Normal, QIcon.Off)
+        iconaAntiorario.addFile(u"res/icons/rotate_left_black_24dp.svg", QSize(), QIcon.Normal, QIcon.Off)
         self.bottoneRuotaAntiorario.setIconSize(QSize(24, 24))
         self.bottoneRuotaAntiorario.setIcon(iconaAntiorario)
         self.gridLayout.addWidget(self.bottoneRuotaAntiorario, 1, 4, 1, 1)
@@ -83,18 +83,18 @@ class MainView(object):
         self.bottoneRuotaOrario.setObjectName("BottoneRuotaOrario")
         self.bottoneRuotaOrario.setToolTip("Ruota immagine in senso orario")
         iconaOrario = QIcon()
-        iconaOrario.addFile(u"icons/rotate_right_black_24dp.svg", QSize(), QIcon.Normal, QIcon.Off)
+        iconaOrario.addFile(u"res/icons/rotate_right_black_24dp.svg", QSize(), QIcon.Normal, QIcon.Off)
         self.bottoneRuotaOrario.setIcon(iconaOrario)
         self.bottoneRuotaOrario.setIconSize(QSize(24, 24))
         self.gridLayout.addWidget(self.bottoneRuotaOrario, 1, 5, 1, 1)
 
-        mainWindow.setCentralWidget(self.centralwidget)
+        self.setCentralWidget(self.centralwidget)
 
+    def setImage(self, path):
+        pixmap = QPixmap(path)
+        pixmap.scaled(self.immagine.width(), self.immagine.height(), QtCore.Qt.KeepAspectRatio)
+        self.immagine.setPixmap(pixmap)
 
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    mainWindow = QtWidgets.QMainWindow()
-    mainView = MainView(mainWindow)
-    mainWindow.show()
-    sys.exit(app.exec_())
+    def autoresizeImage(self):
+        pixmap = self.immagine.pixmap().scaled(self.immagine.width(), self.immagine.height(), QtCore.Qt.KeepAspectRatio)
+        self.immagine.setPixmap(pixmap)
