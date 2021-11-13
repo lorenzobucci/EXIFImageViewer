@@ -5,11 +5,11 @@ from PyQt5.QtWidgets import QStyle
 
 
 class MainView(object):
-    def setupView(self, MainWindow):
-        MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1022, 616)
+    def __init__(self, mainWindow):
+        mainWindow.setObjectName("MainWindow")
+        mainWindow.resize(1022, 616)
 
-        self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.centralwidget = QtWidgets.QWidget(mainWindow)
         self.centralwidget.setObjectName("centralwidget")
 
         self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
@@ -88,14 +88,13 @@ class MainView(object):
         self.bottoneRuotaOrario.setIconSize(QSize(24, 24))
         self.gridLayout.addWidget(self.bottoneRuotaOrario, 1, 5, 1, 1)
 
-        MainWindow.setCentralWidget(self.centralwidget)
+        mainWindow.setCentralWidget(self.centralwidget)
 
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    mainView = MainView()
-    mainView.setupView(MainWindow)
-    MainWindow.show()
+    mainWindow = QtWidgets.QMainWindow()
+    mainView = MainView(mainWindow)
+    mainWindow.show()
     sys.exit(app.exec_())
