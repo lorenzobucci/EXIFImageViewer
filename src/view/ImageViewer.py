@@ -13,6 +13,7 @@ class ImageViewer(QtWidgets.QMainWindow):
 
         self.setObjectName("ImageViewer")
         self.resize(1022, 616)
+        self.setMinimumHeight(200)
 
         self.centralwidget = QtWidgets.QWidget(self)
         self.centralwidget.setObjectName("centralwidget")
