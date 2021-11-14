@@ -1,7 +1,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QSize
 from PyQt5.QtGui import QPixmap, QIcon, QKeySequence
-from PyQt5.QtWidgets import QStyle, QShortcut
+from PyQt5.QtWidgets import QStyle
 
 
 class ImageViewer(QtWidgets.QMainWindow):

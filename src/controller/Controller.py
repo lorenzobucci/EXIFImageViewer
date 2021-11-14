@@ -3,7 +3,7 @@ import sys
 from src.view.ImageViewer import ImageViewer
 
 
-class Controller(object):
+class Controller:
     def __init__(self, imageViewer: ImageViewer):
         self.imageViewer = imageViewer
 
