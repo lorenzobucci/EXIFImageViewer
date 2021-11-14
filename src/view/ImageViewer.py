@@ -51,6 +51,7 @@ class ImageViewer(QtWidgets.QMainWindow):
         self.bottoneImmaginePrecedente.setToolTip("Immagine precedente")
         self.bottoneImmaginePrecedente.setIcon(self.bottoneImmaginePrecedente.style().standardIcon(QStyle.SP_ArrowLeft))
         self.bottoneImmaginePrecedente.setIconSize(QSize(24, 24))
+        self.bottoneImmaginePrecedente.setShortcut(QKeySequence.MoveToPreviousChar)
         self.gridLayout.addWidget(self.bottoneImmaginePrecedente, 1, 2, 1, 1)
 
         self.bottoneImmagineSuccessiva = QtWidgets.QPushButton(self.centralwidget)
@@ -62,6 +63,7 @@ class ImageViewer(QtWidgets.QMainWindow):
         self.bottoneImmagineSuccessiva.setIcon(
             self.bottoneImmagineSuccessiva.style().standardIcon(QStyle.SP_ArrowRight))
         self.bottoneImmagineSuccessiva.setIconSize(QSize(24, 24))
+        self.bottoneImmagineSuccessiva.setShortcut(QKeySequence.MoveToNextChar)
         self.gridLayout.addWidget(self.bottoneImmagineSuccessiva, 1, 3, 1, 1)
 
         self.bottoneRuotaAntiorario = QtWidgets.QPushButton(self.centralwidget)
