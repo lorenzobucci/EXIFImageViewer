@@ -6,6 +6,7 @@ from PyQt5.QtWidgets import QStyle
 
 class ImageViewer(QtWidgets.QMainWindow):
     windowResized = QtCore.pyqtSignal()
+    pixmap = None
 
     def __init__(self):
         super().__init__()
@@ -93,13 +94,11 @@ class ImageViewer(QtWidgets.QMainWindow):
         self.setCentralWidget(self.centralwidget)
 
     def setImage(self, path):
-        pixmap = QPixmap(path)
-        pixmap.scaled(self.immagine.width(), self.immagine.height(), QtCore.Qt.KeepAspectRatio)
-        self.immagine.setPixmap(pixmap)
+        self.pixmap = QPixmap(path)
+        self.autoresizeImage()
 
     def autoresizeImage(self):
-        pixmap = self.immagine.pixmap().scaled(self.immagine.width(), self.immagine.height(), QtCore.Qt.KeepAspectRatio)
-        self.immagine.setPixmap(pixmap)
+        self.immagine.setPixmap(self.pixmap.scaled(self.immagine.width(), self.immagine.height(), QtCore.Qt.KeepAspectRatio))
 
     def resizeEvent(self, event):
         super(ImageViewer, self).resizeEvent(event)
