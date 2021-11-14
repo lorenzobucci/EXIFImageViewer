@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import QStyle
 
 
 class ImageViewer(QtWidgets.QMainWindow):
-    windowResized = QtCore.pyqtSignal()
+    imageResized = QtCore.pyqtSignal()
     pixmap = None
 
     def __init__(self):
@@ -20,14 +20,8 @@ class ImageViewer(QtWidgets.QMainWindow):
         self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
         self.gridLayout.setObjectName("gridLayout")
 
-        self.immagine = QtWidgets.QLabel(self.centralwidget)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Ignored, QtWidgets.QSizePolicy.Ignored)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.immagine.sizePolicy().hasHeightForWidth())
-        self.immagine.setSizePolicy(sizePolicy)
-        self.immagine.setAlignment(QtCore.Qt.AlignCenter)
-        self.immagine.setObjectName("immagine")
+        self.immagine = ImageWidget(self.centralwidget)
+        self.immagine.imageResized.connect(lambda: self.imageResized.emit())
         self.gridLayout.addWidget(self.immagine, 0, 0, 1, 7)
 
         spacerSx = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
@@ -98,8 +92,23 @@ class ImageViewer(QtWidgets.QMainWindow):
         self.autoresizeImage()
 
     def autoresizeImage(self):
-        self.immagine.setPixmap(self.pixmap.scaled(self.immagine.width(), self.immagine.height(), QtCore.Qt.KeepAspectRatio))
+        self.immagine.setPixmap(
+            self.pixmap.scaled(self.immagine.width(), self.immagine.height(), QtCore.Qt.KeepAspectRatio))
 
-    def resizeEvent(self, event):
-        super(ImageViewer, self).resizeEvent(event)
-        self.windowResized.emit()
+
+class ImageWidget(QtWidgets.QLabel):
+    imageResized = QtCore.pyqtSignal()
+
+    def __init__(self, parent: QtWidgets.QWidget):
+        super().__init__(parent)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Ignored, QtWidgets.QSizePolicy.Ignored)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.sizePolicy().hasHeightForWidth())
+        self.setSizePolicy(sizePolicy)
+        self.setAlignment(QtCore.Qt.AlignCenter)
+        self.setObjectName("immagine")
+
+    def resizeEvent(self, a0: QtGui.QResizeEvent) -> None:
+        super(ImageWidget, self).resizeEvent(a0)
+        self.imageResized.emit()
