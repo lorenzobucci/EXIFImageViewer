@@ -1,7 +1,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QSize
-from PyQt5.QtGui import QPixmap, QIcon
-from PyQt5.QtWidgets import QStyle
+from PyQt5.QtGui import QPixmap, QIcon, QKeySequence
+from PyQt5.QtWidgets import QStyle, QShortcut
 
 
 class ImageViewer(QtWidgets.QMainWindow):
@@ -69,11 +69,12 @@ class ImageViewer(QtWidgets.QMainWindow):
         self.bottoneRuotaAntiorario.setMaximumSize(QSize(50, 50))
         self.bottoneRuotaAntiorario.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.bottoneRuotaAntiorario.setObjectName("BottoneRuotaAntiorario")
-        self.bottoneRuotaAntiorario.setToolTip("Ruota immagine in senso antiorario")
+        self.bottoneRuotaAntiorario.setToolTip("Ruota immagine in senso antiorario (CTRL+,)")
         iconaAntiorario = QIcon()
         iconaAntiorario.addFile(u"res/icons/rotate_left_black_24dp.svg", QSize(), QIcon.Normal, QIcon.Off)
         self.bottoneRuotaAntiorario.setIconSize(QSize(24, 24))
         self.bottoneRuotaAntiorario.setIcon(iconaAntiorario)
+        self.bottoneRuotaAntiorario.setShortcut(QKeySequence("Ctrl+,"))
         self.gridLayout.addWidget(self.bottoneRuotaAntiorario, 1, 4, 1, 1)
 
         self.bottoneRuotaOrario = QtWidgets.QPushButton(self.centralwidget)
@@ -81,11 +82,12 @@ class ImageViewer(QtWidgets.QMainWindow):
         self.bottoneRuotaOrario.setMaximumSize(QSize(50, 50))
         self.bottoneRuotaOrario.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.bottoneRuotaOrario.setObjectName("BottoneRuotaOrario")
-        self.bottoneRuotaOrario.setToolTip("Ruota immagine in senso orario")
+        self.bottoneRuotaOrario.setToolTip("Ruota immagine in senso orario (CTRL+.)")
         iconaOrario = QIcon()
         iconaOrario.addFile(u"res/icons/rotate_right_black_24dp.svg", QSize(), QIcon.Normal, QIcon.Off)
         self.bottoneRuotaOrario.setIcon(iconaOrario)
         self.bottoneRuotaOrario.setIconSize(QSize(24, 24))
+        self.bottoneRuotaOrario.setShortcut(QKeySequence("Ctrl+."))
         self.gridLayout.addWidget(self.bottoneRuotaOrario, 1, 5, 1, 1)
 
         self.setCentralWidget(self.centralwidget)
