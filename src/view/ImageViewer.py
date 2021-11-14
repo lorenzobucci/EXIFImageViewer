@@ -96,14 +96,14 @@ class ImageViewer(QtWidgets.QMainWindow):
         self.pixmap = QPixmap(path)
         self.autoresizeImage()
 
-    def autoresizeImage(self):
-        self.immagine.setPixmap(
-            self.pixmap.scaled(self.immagine.width(), self.immagine.height(), QtCore.Qt.KeepAspectRatio))
-
     def rotateImage(self, degrees):
         transform = QtGui.QTransform().rotate(degrees)
         self.pixmap = self.pixmap.transformed(transform, QtCore.Qt.SmoothTransformation)
         self.autoresizeImage()
+
+    def autoresizeImage(self):
+        self.immagine.setPixmap(
+            self.pixmap.scaled(self.immagine.width(), self.immagine.height(), QtCore.Qt.KeepAspectRatio))
 
 
 class ImageWidget(QtWidgets.QLabel):
