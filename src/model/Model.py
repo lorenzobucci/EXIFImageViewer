@@ -18,8 +18,8 @@ class Model:
 
 
 class BidirectionalIterator:
-    def __init__(self, list: list, currentIndex: int):
-        self.list = list
+    def __init__(self, actualList: list, currentIndex: int):
+        self.list = actualList
         self.index = currentIndex
 
     def next(self):

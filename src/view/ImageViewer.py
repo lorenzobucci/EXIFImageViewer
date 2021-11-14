@@ -17,13 +17,13 @@ class ImageViewer(QtWidgets.QMainWindow):
         self.setMinimumHeight(200)
         self.setWindowTitle("EXIF & Image Viewer")
 
-        self.centralwidget = QtWidgets.QWidget(self)
-        self.centralwidget.setObjectName("centralwidget")
+        self.centralWidget = QtWidgets.QWidget(self)
+        self.centralWidget.setObjectName("centralWidget")
 
-        self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
+        self.gridLayout = QtWidgets.QGridLayout(self.centralWidget)
         self.gridLayout.setObjectName("gridLayout")
 
-        self.immagine = ImageWidget(self.centralwidget)
+        self.immagine = ImageWidget(self.centralWidget)
         self.immagine.imageResized.connect(lambda: self.imageResized.emit())
         self.gridLayout.addWidget(self.immagine, 0, 0, 1, 7)
 
@@ -33,7 +33,7 @@ class ImageViewer(QtWidgets.QMainWindow):
         spacerDx = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.gridLayout.addItem(spacerDx, 1, 6, 1, 1)
 
-        self.bottoneTagEXIF = QtWidgets.QPushButton(self.centralwidget)
+        self.bottoneTagEXIF = QtWidgets.QPushButton(self.centralWidget)
         self.bottoneTagEXIF.setMinimumSize(QSize(50, 50))
         self.bottoneTagEXIF.setMaximumSize(QSize(50, 50))
         self.bottoneTagEXIF.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
@@ -43,7 +43,7 @@ class ImageViewer(QtWidgets.QMainWindow):
         self.bottoneTagEXIF.setIconSize(QSize(24, 24))
         self.gridLayout.addWidget(self.bottoneTagEXIF, 1, 1, 1, 1)
 
-        self.bottoneImmaginePrecedente = QtWidgets.QPushButton(self.centralwidget)
+        self.bottoneImmaginePrecedente = QtWidgets.QPushButton(self.centralWidget)
         self.bottoneImmaginePrecedente.setMinimumSize(QSize(50, 50))
         self.bottoneImmaginePrecedente.setMaximumSize(QSize(50, 50))
         self.bottoneImmaginePrecedente.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
@@ -54,7 +54,7 @@ class ImageViewer(QtWidgets.QMainWindow):
         self.bottoneImmaginePrecedente.setShortcut(QKeySequence.MoveToPreviousChar)
         self.gridLayout.addWidget(self.bottoneImmaginePrecedente, 1, 2, 1, 1)
 
-        self.bottoneImmagineSuccessiva = QtWidgets.QPushButton(self.centralwidget)
+        self.bottoneImmagineSuccessiva = QtWidgets.QPushButton(self.centralWidget)
         self.bottoneImmagineSuccessiva.setMinimumSize(QSize(50, 50))
         self.bottoneImmagineSuccessiva.setMaximumSize(QSize(50, 50))
         self.bottoneImmagineSuccessiva.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
@@ -66,7 +66,7 @@ class ImageViewer(QtWidgets.QMainWindow):
         self.bottoneImmagineSuccessiva.setShortcut(QKeySequence.MoveToNextChar)
         self.gridLayout.addWidget(self.bottoneImmagineSuccessiva, 1, 3, 1, 1)
 
-        self.bottoneRuotaAntiorario = QtWidgets.QPushButton(self.centralwidget)
+        self.bottoneRuotaAntiorario = QtWidgets.QPushButton(self.centralWidget)
         self.bottoneRuotaAntiorario.setMinimumSize(QSize(50, 50))
         self.bottoneRuotaAntiorario.setMaximumSize(QSize(50, 50))
         self.bottoneRuotaAntiorario.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
@@ -79,7 +79,7 @@ class ImageViewer(QtWidgets.QMainWindow):
         self.bottoneRuotaAntiorario.setShortcut(QKeySequence("Ctrl+,"))
         self.gridLayout.addWidget(self.bottoneRuotaAntiorario, 1, 4, 1, 1)
 
-        self.bottoneRuotaOrario = QtWidgets.QPushButton(self.centralwidget)
+        self.bottoneRuotaOrario = QtWidgets.QPushButton(self.centralWidget)
         self.bottoneRuotaOrario.setMinimumSize(QSize(50, 50))
         self.bottoneRuotaOrario.setMaximumSize(QSize(50, 50))
         self.bottoneRuotaOrario.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
@@ -92,7 +92,7 @@ class ImageViewer(QtWidgets.QMainWindow):
         self.bottoneRuotaOrario.setShortcut(QKeySequence("Ctrl+."))
         self.gridLayout.addWidget(self.bottoneRuotaOrario, 1, 5, 1, 1)
 
-        self.setCentralWidget(self.centralwidget)
+        self.setCentralWidget(self.centralWidget)
 
     def setImage(self, path):
         self.pixmap = QPixmap(path)
