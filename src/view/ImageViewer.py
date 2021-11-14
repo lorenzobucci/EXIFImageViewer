@@ -5,8 +5,9 @@ from PyQt5.QtWidgets import QStyle
 
 
 class ImageViewer(QtWidgets.QMainWindow):
-    imageResized = QtCore.pyqtSignal()
     pixmap = None
+
+    imageResized = QtCore.pyqtSignal()
 
     def __init__(self):
         super().__init__()
@@ -96,6 +97,11 @@ class ImageViewer(QtWidgets.QMainWindow):
     def autoresizeImage(self):
         self.immagine.setPixmap(
             self.pixmap.scaled(self.immagine.width(), self.immagine.height(), QtCore.Qt.KeepAspectRatio))
+
+    def rotateImage(self, degrees):
+        transform = QtGui.QTransform().rotate(degrees)
+        self.pixmap = self.pixmap.transformed(transform, QtCore.Qt.SmoothTransformation)
+        self.autoresizeImage()
 
 
 class ImageWidget(QtWidgets.QLabel):
