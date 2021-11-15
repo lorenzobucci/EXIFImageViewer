@@ -13,7 +13,7 @@ class ImageViewer(QtWidgets.QMainWindow):
         super().__init__()
 
         self.setObjectName("ImageViewer")
-        self.resize(1022, 616)
+        self.resize(1020, 620)
         self.setMinimumHeight(200)
         self.setWindowTitle("Visualizzatore immagini & EXIF")
 
