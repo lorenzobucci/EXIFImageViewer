@@ -3,6 +3,8 @@ from PyQt5.QtCore import QSize
 from PyQt5.QtGui import QPixmap, QIcon, QKeySequence
 from PyQt5.QtWidgets import QStyle
 
+from src.view.ImageWidget import ImageWidget
+
 
 class ImageViewer(QtWidgets.QMainWindow):
     pixmap = None
@@ -106,21 +108,3 @@ class ImageViewer(QtWidgets.QMainWindow):
     def autoresizeImage(self):
         self.immagine.setPixmap(
             self.pixmap.scaled(self.immagine.width(), self.immagine.height(), QtCore.Qt.KeepAspectRatio))
-
-
-class ImageWidget(QtWidgets.QLabel):
-    imageResized = QtCore.pyqtSignal()
-
-    def __init__(self, parent: QtWidgets.QWidget):
-        super().__init__(parent)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Ignored, QtWidgets.QSizePolicy.Ignored)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.sizePolicy().hasHeightForWidth())
-        self.setSizePolicy(sizePolicy)
-        self.setAlignment(QtCore.Qt.AlignCenter)
-        self.setObjectName("immagine")
-
-    def resizeEvent(self, a0: QtGui.QResizeEvent) -> None:
-        super(ImageWidget, self).resizeEvent(a0)
-        self.imageResized.emit()
