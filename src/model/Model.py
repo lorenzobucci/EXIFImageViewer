@@ -32,16 +32,16 @@ class Model:
 
 class BidirectionalIterator:
     def __init__(self, actualList: list, currentIndex: int):
-        self.list = actualList
-        self.index = currentIndex
+        self._list = actualList
+        self._index = currentIndex
 
     def next(self):
-        self.index = (self.index + 1) % len(self.list)
-        return self.list[self.index]
+        self._index = (self._index + 1) % len(self._list)
+        return self._list[self._index]
 
     def prev(self):
-        self.index = (self.index - 1) % len(self.list)
-        return self.list[self.index]
+        self._index = (self._index - 1) % len(self._list)
+        return self._list[self._index]
 
     def __iter__(self):
         return self
