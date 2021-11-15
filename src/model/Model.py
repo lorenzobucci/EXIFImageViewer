@@ -25,6 +25,9 @@ class Model:
     def _updateEXIFData(self):
         imageWithEXIF = Image.open(self.currentImage)
         self.currentEXIFData = {ExifTags.TAGS[k]: v for k, v in imageWithEXIF._getexif().items() if k in ExifTags.TAGS}
+        if self.currentEXIFData["GPSInfo"] is not None:
+            self.currentEXIFData["GPSInfo"] = {ExifTags.GPSTAGS[k]: v for k, v in
+                                               self.currentEXIFData["GPSInfo"].items() if k in ExifTags.GPSTAGS}
 
 
 class BidirectionalIterator:
