@@ -8,7 +8,6 @@ class EXIFDialog(QtWidgets.QDialog):
         super().__init__()
         self.setObjectName("Dialog")
         self.resize(330, 390)
-        self.setWindowOpacity(0.0)
         self.setWindowTitle("Dati EXIF")
 
         self.gridLayout = QtWidgets.QGridLayout(self)
