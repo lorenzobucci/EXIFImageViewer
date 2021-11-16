@@ -15,6 +15,7 @@ class EXIFDialog(QtWidgets.QDialog):
 
         self.tableView = QtWidgets.QTableView(self)
         self.tableView.setObjectName("tableView")
+        self.tableView.setAlternatingRowColors(True)
         self.tableView.setModel(QEXIFModel.QEXIFModel(exifData))
         self.gridLayout.addWidget(self.tableView, 0, 0, 1, 1)
 

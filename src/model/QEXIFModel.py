@@ -17,7 +17,7 @@ class QEXIFModel(QAbstractTableModel):
     def data(self, QModelIndex, role=None):
         if role != Qt.DisplayRole or not QModelIndex.isValid():
             return QVariant()
-        return sorted(self.exifDict.items())[QModelIndex.row()][QModelIndex.column()]
+        return str(sorted(self.exifDict.items())[QModelIndex.row()][QModelIndex.column()])
 
     def headerData(self, p_int, Qt_Orientation, role=None):
         if role != Qt.DisplayRole or Qt_Orientation != Qt.Horizontal:
