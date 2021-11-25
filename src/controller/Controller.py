@@ -1,5 +1,7 @@
 import sys
 
+from pathlib import Path
+
 from src.model import Model
 from src.view.EXIFDialog import EXIFDialog
 from src.view.ImageViewer import ImageViewer
@@ -17,7 +19,9 @@ class Controller:
         self.imageViewer.bottoneRuotaAntiorario.clicked.connect(self.bottoneRuotaAntiorarioHandler)
         self.imageViewer.bottoneRuotaOrario.clicked.connect(self.bottoneRuotaOrarioHandler)
 
-        self.imageViewer.setImage(sys.argv[1])
+        imagePath = Path(sys.argv[1])
+        self.imageViewer.setImage(str(imagePath))
+        self.imageViewer.addFilenameToWindowTitle(imagePath.name)
 
     def imageResizedHandler(self):
         self.imageViewer.autoresizeImage()
@@ -27,10 +31,14 @@ class Controller:
         exifDialog.exec()
 
     def bottoneImmaginePrecedenteHandler(self):
-        self.imageViewer.setImage(str(self.model.getPreviousImage()))
+        imagePath = self.model.getPreviousImage()
+        self.imageViewer.setImage(str(imagePath))
+        self.imageViewer.addFilenameToWindowTitle(imagePath.name)
 
     def bottoneImmagineSuccessivaHandler(self):
-        self.imageViewer.setImage(str(self.model.getNextImage()))
+        imagePath = self.model.getNextImage()
+        self.imageViewer.setImage(str(imagePath))
+        self.imageViewer.addFilenameToWindowTitle(imagePath.name)
 
     def bottoneRuotaAntiorarioHandler(self):
         self.imageViewer.rotateImage(-90)

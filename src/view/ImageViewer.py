@@ -17,7 +17,6 @@ class ImageViewer(QtWidgets.QMainWindow):
         self.setObjectName("ImageViewer")
         self.resize(1020, 620)
         self.setMinimumHeight(200)
-        self.setWindowTitle("Visualizzatore immagini & EXIF")
 
         self.centralWidget = QtWidgets.QWidget(self)
         self.centralWidget.setObjectName("centralWidget")
@@ -108,3 +107,6 @@ class ImageViewer(QtWidgets.QMainWindow):
     def autoresizeImage(self):
         self.immagine.setPixmap(
             self.pixmap.scaled(self.immagine.width(), self.immagine.height(), QtCore.Qt.KeepAspectRatio))
+
+    def addFilenameToWindowTitle(self, filename):
+        self.setWindowTitle("Visualizzatore immagini & EXIF - " + filename)
