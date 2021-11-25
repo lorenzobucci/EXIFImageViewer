@@ -25,9 +25,19 @@ class Model:
     def _updateEXIFData(self):
         imageWithEXIF = Image.open(self.currentImage)
         self.currentEXIFData = {ExifTags.TAGS[k]: v for k, v in imageWithEXIF._getexif().items() if k in ExifTags.TAGS}
-        if self.currentEXIFData["GPSInfo"] is not None:
-            self.currentEXIFData["GPSInfo"] = {ExifTags.GPSTAGS[k]: v for k, v in
-                                               self.currentEXIFData["GPSInfo"].items() if k in ExifTags.GPSTAGS}
+        if "GPSInfo" in self.currentEXIFData:
+            gpsinfo = {ExifTags.GPSTAGS[k]: v for k, v in self.currentEXIFData["GPSInfo"].items() if
+                       k in ExifTags.GPSTAGS}
+            if "GPSLatitude" in gpsinfo and "GPSLongitude" in gpsinfo:
+                latitudeStr = str(int(gpsinfo["GPSLatitude"][0])) + "°" + \
+                              str(int(gpsinfo["GPSLatitude"][1])) + "\'" + \
+                              str(gpsinfo["GPSLatitude"][2]) + "\"" + gpsinfo["GPSLatitudeRef"]
+                longitudeStr = str(int(gpsinfo["GPSLongitude"][0])) + "°" + \
+                               str(int(gpsinfo["GPSLongitude"][1])) + "\'" + \
+                               str(gpsinfo["GPSLongitude"][2]) + "\"" + gpsinfo["GPSLongitudeRef"]
+                self.currentEXIFData["GPS Coordinates (DMS)"] = latitudeStr + "  " + longitudeStr
+            self.currentEXIFData.update(gpsinfo)
+            self.currentEXIFData.pop("GPSInfo")
 
 
 class BidirectionalIterator:
