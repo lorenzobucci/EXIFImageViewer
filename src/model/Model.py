@@ -1,3 +1,4 @@
+import re
 import sys
 
 from pathlib import Path
@@ -35,7 +36,10 @@ class Model:
                 longitudeStr = str(int(gpsinfo["GPSLongitude"][0])) + "°" + \
                                str(int(gpsinfo["GPSLongitude"][1])) + "\'" + \
                                str(gpsinfo["GPSLongitude"][2]) + "\"" + gpsinfo["GPSLongitudeRef"]
-                self.currentEXIFData["GPS Coordinates (DMS)"] = latitudeStr + "  " + longitudeStr
+                self.currentEXIFData["GPS Coordinates (DMS)"] = latitudeStr + " " + longitudeStr
+                longDD, latDD = parseDMS(self.currentEXIFData["GPS Coordinates (DMS)"])
+                self.currentEXIFData["GPS Coordinates (DD)"] = str(longDD) + ", " + str(latDD)
+
             self.currentEXIFData.update(gpsinfo)
             self.currentEXIFData.pop("GPSInfo")
 
@@ -55,3 +59,18 @@ class BidirectionalIterator:
 
     def __iter__(self):
         return self
+
+
+def dms2dd(degrees, minutes, seconds, direction):
+    dd = float(degrees) + float(minutes) / 60 + float(seconds) / (60 * 60);
+    if direction == 'S' or direction == 'W':
+        dd *= -1
+    return dd
+
+
+def parseDMS(dms):
+    parts = re.split('[°\' "]', dms)
+    lat = dms2dd(parts[0], parts[1], parts[2], parts[3])
+    lng = dms2dd(parts[4], parts[5], parts[6], parts[7])
+
+    return lat, lng
