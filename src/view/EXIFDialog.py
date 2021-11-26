@@ -1,5 +1,5 @@
-from PyQt5 import QtCore, QtWidgets, Qt
-from PyQt5.QtWidgets import QAbstractItemView
+from PyQt5 import QtWidgets, QtCore
+from PyQt5.QtWidgets import QAbstractItemView, QPushButton, QHBoxLayout, QLabel
 
 from src.model import QEXIFModel
 
@@ -25,12 +25,21 @@ class EXIFDialog(QtWidgets.QDialog):
         self.tableView.setModel(QEXIFModel.QEXIFModel(exifData))
         self.gridLayout.addWidget(self.tableView, 0, 0, 1, 1)
 
-        self.buttonBox = QtWidgets.QDialogButtonBox(self)
-        self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Close)
-        self.buttonBox.button(QtWidgets.QDialogButtonBox.Close).setText("Chiudi")
-        self.buttonBox.setObjectName("buttonBox")
-        self.gridLayout.addWidget(self.buttonBox, 1, 0, 1, 1)
+        self.horizontalLayout = QHBoxLayout()
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
 
-        self.buttonBox.accepted.connect(self.accept)
-        self.buttonBox.rejected.connect(self.reject)
+        if "GPS Coordinates (DD)" in exifData:
+            self.linkMappaGPS = QLabel(self)
+            self.linkMappaGPS.setObjectName(u"linkMappaGPS")
+            self.linkMappaGPS.setAlignment(QtCore.Qt.AlignCenter)
+            self.linkMappaGPS.setText("<a href=\'https://www.google.com/maps/search/?api=1&query=" + str(exifData["GPS Coordinates (DD)"]) + "\'>Mappa GPS</a>")
+            self.linkMappaGPS.setOpenExternalLinks(True)
+            self.horizontalLayout.addWidget(self.linkMappaGPS)
+
+        self.bottoneChiudi = QPushButton(self)
+        self.bottoneChiudi.setObjectName(u"bottoneChiudi")
+        self.bottoneChiudi.setText("Chiudi")
+        self.bottoneChiudi.clicked.connect(self.accept)
+        self.horizontalLayout.addWidget(self.bottoneChiudi)
+
+        self.gridLayout.addLayout(self.horizontalLayout, 1, 0, 3, 1)
