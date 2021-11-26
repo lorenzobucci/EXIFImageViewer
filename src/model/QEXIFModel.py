@@ -14,10 +14,10 @@ class QEXIFModel(QAbstractTableModel):
     def columnCount(self, parent=None, *args, **kwargs):
         return len(headers)
 
-    def data(self, QModelIndex, role=None):
-        if role != Qt.DisplayRole or not QModelIndex.isValid():
+    def data(self, modelIndex, role=None):
+        if role != Qt.DisplayRole or not modelIndex.isValid():
             return QVariant()
-        return str(sorted(self.exifDict.items())[QModelIndex.row()][QModelIndex.column()])
+        return str(sorted(self.exifDict.items())[modelIndex.row()][modelIndex.column()])
 
     def headerData(self, p_int, Qt_Orientation, role=None):
         if role != Qt.DisplayRole or Qt_Orientation != Qt.Horizontal:

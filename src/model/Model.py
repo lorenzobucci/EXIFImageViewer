@@ -62,7 +62,7 @@ class BidirectionalIterator:
 
 
 def dms2dd(degrees, minutes, seconds, direction):
-    dd = float(degrees) + float(minutes) / 60 + float(seconds) / (60 * 60);
+    dd = float(degrees) + float(minutes) / 60 + float(seconds) / (60 * 60)
     if direction == 'S' or direction == 'W':
         dd *= -1
     return dd
