@@ -1,20 +1,20 @@
-from PyQt5 import QtWidgets, QtCore
-from PyQt5.QtWidgets import QAbstractItemView, QPushButton, QHBoxLayout, QLabel
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QAbstractItemView, QPushButton, QHBoxLayout, QLabel, QDialog, QGridLayout, QTableView
 
-from src.model import QEXIFModel
+from model import QEXIFModel
 
 
-class EXIFDialog(QtWidgets.QDialog):
+class EXIFDialog(QDialog):
     def __init__(self, exifData: dict):
         super().__init__()
         self.setObjectName("Dialog")
         self.resize(345, 450)
         self.setWindowTitle("Dati EXIF")
 
-        self.gridLayout = QtWidgets.QGridLayout(self)
+        self.gridLayout = QGridLayout(self)
         self.gridLayout.setObjectName("gridLayout")
 
-        self.tableView = QtWidgets.QTableView(self)
+        self.tableView = QTableView(self)
         self.tableView.setObjectName("tableView")
         self.tableView.setAlternatingRowColors(True)
         self.tableView.setSelectionMode(QAbstractItemView.SingleSelection)
@@ -31,8 +31,9 @@ class EXIFDialog(QtWidgets.QDialog):
         if "GPS Coordinates (DD)" in exifData:
             self.linkMappaGPS = QLabel(self)
             self.linkMappaGPS.setObjectName(u"linkMappaGPS")
-            self.linkMappaGPS.setAlignment(QtCore.Qt.AlignCenter)
-            self.linkMappaGPS.setText("<a href=\'https://www.google.com/maps/search/?api=1&query=" + str(exifData["GPS Coordinates (DD)"]) + "\'>Mappa GPS</a>")
+            self.linkMappaGPS.setAlignment(Qt.AlignCenter)
+            self.linkMappaGPS.setText("<a href=\'https://www.google.com/maps/search/?api=1&query=" + str(
+                exifData["GPS Coordinates (DD)"]) + "\'>Mappa GPS</a>")
             self.linkMappaGPS.setOpenExternalLinks(True)
             self.horizontalLayout.addWidget(self.linkMappaGPS)
 

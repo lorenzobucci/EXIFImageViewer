@@ -1,12 +1,12 @@
 import sys
 
-from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import QApplication
 
-from src.controller.Controller import Controller
-from src.model.Model import Model
-from src.view.ImageViewer import ImageViewer
+from controller.Controller import Controller
+from model.Model import Model
+from view.ImageViewer import ImageViewer
 
-app = QtWidgets.QApplication(sys.argv)
+app = QApplication(sys.argv)
 model = Model()
 mainWindow = ImageViewer()
 controller = Controller(mainWindow, model)

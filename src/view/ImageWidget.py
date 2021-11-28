@@ -1,19 +1,22 @@
-from PyQt5 import QtWidgets, QtCore, QtGui
+from PyQt5.QtCore import Qt
+from PyQt5.QtCore import pyqtSignal
+from PyQt5.QtGui import QResizeEvent
+from PyQt5.QtWidgets import QLabel, QWidget, QSizePolicy
 
 
-class ImageWidget(QtWidgets.QLabel):
-    imageResized = QtCore.pyqtSignal()
+class ImageWidget(QLabel):
+    imageResized = pyqtSignal()
 
-    def __init__(self, parent: QtWidgets.QWidget):
+    def __init__(self, parent: QWidget):
         super().__init__(parent)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Ignored, QtWidgets.QSizePolicy.Ignored)
+        sizePolicy = QSizePolicy(QSizePolicy.Ignored, QSizePolicy.Ignored)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.sizePolicy().hasHeightForWidth())
         self.setSizePolicy(sizePolicy)
-        self.setAlignment(QtCore.Qt.AlignCenter)
+        self.setAlignment(Qt.AlignCenter)
         self.setObjectName("immagine")
 
-    def resizeEvent(self, a0: QtGui.QResizeEvent) -> None:
+    def resizeEvent(self, a0: QResizeEvent) -> None:
         super(ImageWidget, self).resizeEvent(a0)
         self.imageResized.emit()

@@ -2,9 +2,9 @@ import sys
 
 from pathlib import Path
 
-from src.model import Model
-from src.view.EXIFDialog import EXIFDialog
-from src.view.ImageViewer import ImageViewer
+from model import Model
+from view.EXIFDialog import EXIFDialog
+from view.ImageViewer import ImageViewer
 
 
 class Controller:
