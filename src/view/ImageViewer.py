@@ -76,7 +76,7 @@ class ImageViewer(QMainWindow):
         self.bottoneRuotaAntiorario.setObjectName("BottoneRuotaAntiorario")
         self.bottoneRuotaAntiorario.setToolTip("Ruota immagine in senso antiorario (CTRL+,)")
         iconaAntiorario = QIcon()
-        iconaAntiorario.addFile(u"res/icons/rotate_left_black_24dp.svg", QSize(), QIcon.Normal, QIcon.Off)
+        iconaAntiorario.addFile(_resourcePath("res/icons/rotate_left_black_24dp.svg"), QSize(), QIcon.Normal, QIcon.Off)
         self.bottoneRuotaAntiorario.setIconSize(QSize(24, 24))
         self.bottoneRuotaAntiorario.setIcon(iconaAntiorario)
         self.bottoneRuotaAntiorario.setShortcut(QKeySequence("Ctrl+,"))
@@ -89,7 +89,7 @@ class ImageViewer(QMainWindow):
         self.bottoneRuotaOrario.setObjectName("BottoneRuotaOrario")
         self.bottoneRuotaOrario.setToolTip("Ruota immagine in senso orario (CTRL+.)")
         iconaOrario = QIcon()
-        iconaOrario.addFile(u"res/icons/rotate_right_black_24dp.svg", QSize(), QIcon.Normal, QIcon.Off)
+        iconaOrario.addFile(_resourcePath("res/icons/rotate_right_black_24dp.svg"), QSize(), QIcon.Normal, QIcon.Off)
         self.bottoneRuotaOrario.setIcon(iconaOrario)
         self.bottoneRuotaOrario.setIconSize(QSize(24, 24))
         self.bottoneRuotaOrario.setShortcut(QKeySequence("Ctrl+."))
@@ -112,3 +112,12 @@ class ImageViewer(QMainWindow):
 
     def addFilenameToWindowTitle(self, filename):
         self.setWindowTitle("Visualizzatore immagini & EXIF - " + filename)
+
+
+def _resourcePath(relativePath):
+    try:
+        basePath = Path(sys._MEIPASS)
+    except Exception:
+        basePath = Path(".").absolute()
+
+    return str(Path.joinpath(basePath, relativePath).absolute())
