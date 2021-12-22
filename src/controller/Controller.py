@@ -9,39 +9,60 @@ from view.ImageViewer import ImageViewer
 
 class Controller:
     def __init__(self, imageViewer: ImageViewer, model: Model):
+        """
+        Inizializza il Controller connettendo gli eventi della view ai loro handler e imposta sulla view l'immagine iniziale da visualizzare.
+        """
         self.imageViewer = imageViewer
         self.model = model
 
-        self.imageViewer.imageResized.connect(self.imageResizedHandler)
-        self.imageViewer.tagEXIFBtn.clicked.connect(self.tagEXIFBtnHandler)
-        self.imageViewer.prevImageBtn.clicked.connect(self.prevImageBtnHandler)
-        self.imageViewer.nextImageBtn.clicked.connect(self.nextImageBtnHandler)
-        self.imageViewer.antiCwRotateBtn.clicked.connect(self.antiCwRotateBtnHandler)
-        self.imageViewer.cwRotateButton.clicked.connect(self.cwRotateButtonHandler)
+        self.imageViewer.imageResized.connect(self._imageResizedHandler)
+        self.imageViewer.tagEXIFBtn.clicked.connect(self._tagEXIFBtnHandler)
+        self.imageViewer.prevImageBtn.clicked.connect(self._prevImageBtnHandler)
+        self.imageViewer.nextImageBtn.clicked.connect(self._nextImageBtnHandler)
+        self.imageViewer.antiCwRotateBtn.clicked.connect(self._antiCwRotateBtnHandler)
+        self.imageViewer.cwRotateButton.clicked.connect(self._cwRotateButtonHandler)
 
-        imagePath = Path(sys.argv[1])
+        imagePath = Path(sys.argv[1])  # percorso dell'immagine passata come parametro da riga di comando
         self.imageViewer.setImage(str(imagePath))
         self.imageViewer.addFilenameToWindowTitle(imagePath.name)
 
-    def imageResizedHandler(self):
+    def _imageResizedHandler(self):
+        """
+        Notifica alla view che il widget contenente l'immagine è stato ridimensionato e conseguentemente l'immagine deve essere scalata opportunamente.
+        """
         self.imageViewer.autoresizeImage()
 
-    def tagEXIFBtnHandler(self):
+    def _tagEXIFBtnHandler(self):
+        """
+        Preleva dal modello i dati EXIF e mostra il dialogo per la loro visualizzazione.
+        """
         exifDialog = EXIFDialog(self.model.currentEXIFData)
         exifDialog.exec()
 
-    def prevImageBtnHandler(self):
+    def _prevImageBtnHandler(self):
+        """
+        Preleva dal modello l'immagine precedente e la imposta sulla view.
+        """
         imagePath = self.model.getPreviousImage()
         self.imageViewer.setImage(str(imagePath))
         self.imageViewer.addFilenameToWindowTitle(imagePath.name)
 
-    def nextImageBtnHandler(self):
+    def _nextImageBtnHandler(self):
+        """
+        Preleva dal modello l'immagine successiva e la imposta sulla view.
+        """
         imagePath = self.model.getNextImage()
         self.imageViewer.setImage(str(imagePath))
         self.imageViewer.addFilenameToWindowTitle(imagePath.name)
 
-    def antiCwRotateBtnHandler(self):
+    def _antiCwRotateBtnHandler(self):
+        """
+        Ruota di 90° in senso antiorario l'immagine.
+        """
         self.imageViewer.rotateImage(-90)
 
-    def cwRotateButtonHandler(self):
+    def _cwRotateButtonHandler(self):
+        """
+        Ruota di 90° in senso orario l'immagine.
+        """
         self.imageViewer.rotateImage(90)
