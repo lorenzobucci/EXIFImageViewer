@@ -3,6 +3,7 @@ from PyQt5.QtCore import Qt, QVariant, QAbstractTableModel
 headers = ["Tag", "Valore"]
 
 
+# Modello usato da PyQt per la visualizzazione della tabella dei tag EXIF
 class QEXIFModel(QAbstractTableModel):
     def __init__(self, exifDict: dict):
         super().__init__()
