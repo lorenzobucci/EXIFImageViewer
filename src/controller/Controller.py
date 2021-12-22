@@ -2,7 +2,7 @@ import sys
 
 from pathlib import Path
 
-from model import Model
+from model.Model import Model
 from view.EXIFDialog import EXIFDialog
 from view.ImageViewer import ImageViewer
 
@@ -13,11 +13,11 @@ class Controller:
         self.model = model
 
         self.imageViewer.imageResized.connect(self.imageResizedHandler)
-        self.imageViewer.bottoneTagEXIF.clicked.connect(self.bottoneTagEXIFHandler)
-        self.imageViewer.bottoneImmaginePrecedente.clicked.connect(self.bottoneImmaginePrecedenteHandler)
-        self.imageViewer.bottoneImmagineSuccessiva.clicked.connect(self.bottoneImmagineSuccessivaHandler)
-        self.imageViewer.bottoneRuotaAntiorario.clicked.connect(self.bottoneRuotaAntiorarioHandler)
-        self.imageViewer.bottoneRuotaOrario.clicked.connect(self.bottoneRuotaOrarioHandler)
+        self.imageViewer.tagEXIFBtn.clicked.connect(self.tagEXIFBtnHandler)
+        self.imageViewer.prevImageBtn.clicked.connect(self.prevImageBtnHandler)
+        self.imageViewer.nextImageBtn.clicked.connect(self.nextImageBtnHandler)
+        self.imageViewer.antiCwRotateBtn.clicked.connect(self.antiCwRotateBtnHandler)
+        self.imageViewer.cwRotateButton.clicked.connect(self.cwRotateButtonHandler)
 
         imagePath = Path(sys.argv[1])
         self.imageViewer.setImage(str(imagePath))
@@ -26,22 +26,22 @@ class Controller:
     def imageResizedHandler(self):
         self.imageViewer.autoresizeImage()
 
-    def bottoneTagEXIFHandler(self):
+    def tagEXIFBtnHandler(self):
         exifDialog = EXIFDialog(self.model.currentEXIFData)
         exifDialog.exec()
 
-    def bottoneImmaginePrecedenteHandler(self):
+    def prevImageBtnHandler(self):
         imagePath = self.model.getPreviousImage()
         self.imageViewer.setImage(str(imagePath))
         self.imageViewer.addFilenameToWindowTitle(imagePath.name)
 
-    def bottoneImmagineSuccessivaHandler(self):
+    def nextImageBtnHandler(self):
         imagePath = self.model.getNextImage()
         self.imageViewer.setImage(str(imagePath))
         self.imageViewer.addFilenameToWindowTitle(imagePath.name)
 
-    def bottoneRuotaAntiorarioHandler(self):
+    def antiCwRotateBtnHandler(self):
         self.imageViewer.rotateImage(-90)
 
-    def bottoneRuotaOrarioHandler(self):
+    def cwRotateButtonHandler(self):
         self.imageViewer.rotateImage(90)

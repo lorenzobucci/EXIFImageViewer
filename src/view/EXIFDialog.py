@@ -1,7 +1,7 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QAbstractItemView, QPushButton, QHBoxLayout, QLabel, QDialog, QGridLayout, QTableView
 
-from model import QEXIFModel
+from model.QEXIFModel import QEXIFModel
 
 
 class EXIFDialog(QDialog):
@@ -29,18 +29,18 @@ class EXIFDialog(QDialog):
         self.horizontalLayout.setObjectName(u"horizontalLayout")
 
         if "GPS Coordinates (DD)" in exifData:
-            self.linkMappaGPS = QLabel(self)
-            self.linkMappaGPS.setObjectName(u"linkMappaGPS")
-            self.linkMappaGPS.setAlignment(Qt.AlignCenter)
-            self.linkMappaGPS.setText("<a href=\'https://www.google.com/maps/search/?api=1&query=" + str(
+            self.GPSMapLink = QLabel(self)
+            self.GPSMapLink.setObjectName(u"linkMappaGPS")
+            self.GPSMapLink.setAlignment(Qt.AlignCenter)
+            self.GPSMapLink.setText("<a href=\'https://www.google.com/maps/search/?api=1&query=" + str(
                 exifData["GPS Coordinates (DD)"]) + "\'>Mappa GPS</a>")
-            self.linkMappaGPS.setOpenExternalLinks(True)
-            self.horizontalLayout.addWidget(self.linkMappaGPS)
+            self.GPSMapLink.setOpenExternalLinks(True)
+            self.horizontalLayout.addWidget(self.GPSMapLink)
 
-        self.bottoneChiudi = QPushButton(self)
-        self.bottoneChiudi.setObjectName(u"bottoneChiudi")
-        self.bottoneChiudi.setText("Chiudi")
-        self.bottoneChiudi.clicked.connect(self.accept)
-        self.horizontalLayout.addWidget(self.bottoneChiudi)
+        self.closeBtn = QPushButton(self)
+        self.closeBtn.setObjectName(u"bottoneChiudi")
+        self.closeBtn.setText("Chiudi")
+        self.closeBtn.clicked.connect(self.accept)
+        self.horizontalLayout.addWidget(self.closeBtn)
 
         self.gridLayout.addLayout(self.horizontalLayout, 1, 0, 3, 1)
