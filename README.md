@@ -23,4 +23,4 @@ python3 src/main.py "../sampleImages/sample.jpg"
 
 Eseguendo questo comando si visualizzerà l'immagine *sample.jpg* contenuta nella cartella *sampleImages* di questa
 repository. Dopodiché sarà possibile switchare la visualizzazione tra le immagini della directory grazie
-all'uso dei bottoni direzionali.
+all'uso dei bottoni direzionali presenti nell'interfaccia utente.
