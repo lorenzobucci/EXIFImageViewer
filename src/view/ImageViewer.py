@@ -8,6 +8,8 @@ from PyQt5.QtWidgets import QStyle, QMainWindow, QWidget, QGridLayout, QSpacerIt
 from view.ImageWidget import ImageWidget
 
 
+# Finestra principale contenente l'immagine e i comandi
+# Codice in larga parte generato automaticamente da QtDesigner
 class ImageViewer(QMainWindow):
     pixmap = None
 
@@ -98,22 +100,35 @@ class ImageViewer(QMainWindow):
         self.setCentralWidget(self.centralWidget)
 
     def setImage(self, path):
+        """
+        Imposta l'immagine e la riscala.
+        """
         self.pixmap = QPixmap(path)
         self.autoresizeImage()
 
     def rotateImage(self, degrees):
+        """
+        Ruota l'immagine in base ai gradi ricevuti come parametro e la riscala.
+        """
         transform = QTransform().rotate(degrees)
         self.pixmap = self.pixmap.transformed(transform, Qt.SmoothTransformation)
         self.autoresizeImage()
 
     def autoresizeImage(self):
+        """
+        Cambia le dimensioni dell'immagine adattandole alle dimensioni del widget che la contiene, mantenendo l'AspectRatio originario.
+        """
         self.image.setPixmap(
             self.pixmap.scaled(self.image.width(), self.image.height(), Qt.KeepAspectRatio))
 
     def addFilenameToWindowTitle(self, filename):
+        """
+        Aggiunge alla titolo della finestra il nome dell'immagine passato come parametro.
+        """
         self.setWindowTitle("Visualizzatore immagini & EXIF - " + filename)
 
 
+# Funzione per la gestione delle path con pyinstaller
 def _resourcePath(relativePath):
     try:
         basePath = Path(sys._MEIPASS)

@@ -4,6 +4,8 @@ from PyQt5.QtWidgets import QAbstractItemView, QPushButton, QHBoxLayout, QLabel,
 from model.QEXIFModel import QEXIFModel
 
 
+# Dialogo per la visualizzazione dei tag EXIF in una tabella
+# Codice in larga parte generato automaticamente da QtDesigner
 class EXIFDialog(QDialog):
     def __init__(self, exifData: dict):
         super().__init__()
@@ -28,6 +30,7 @@ class EXIFDialog(QDialog):
         self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setObjectName(u"horizontalLayout")
 
+        # Se l'immagine contiene dati GPS, attiva la visualizzazione del link alla Mappa GPS
         if "GPS Coordinates (DD)" in exifData:
             self.GPSMapLink = QLabel(self)
             self.GPSMapLink.setObjectName(u"linkMappaGPS")
