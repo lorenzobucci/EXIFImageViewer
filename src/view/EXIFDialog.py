@@ -24,7 +24,7 @@ class EXIFDialog(QDialog):
         self.tableView.horizontalHeader().setDefaultSectionSize(150)
         self.tableView.setHorizontalScrollMode(QAbstractItemView.ScrollPerPixel)
         self.tableView.verticalHeader().setDefaultSectionSize(10)
-        self.tableView.setModel(QEXIFModel.QEXIFModel(exifData))
+        self.tableView.setModel(QEXIFModel(exifData))
         self.gridLayout.addWidget(self.tableView, 0, 0, 1, 1)
 
         self.horizontalLayout = QHBoxLayout()
